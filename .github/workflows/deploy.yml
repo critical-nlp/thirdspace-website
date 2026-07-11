@@ -32,6 +32,8 @@ jobs:
           {
             echo "NEXT_PUBLIC_ADMIN_EMAIL=${{ secrets.NEXT_PUBLIC_ADMIN_EMAIL }}"
             echo "NEXT_PUBLIC_ADMIN_PASSWORD=${{ secrets.NEXT_PUBLIC_ADMIN_PASSWORD }}"
+            echo "NEXT_PUBLIC_ADMIN_SESSION_SECRET=${{ secrets.NEXT_PUBLIC_ADMIN_SESSION_SECRET }}"
+            echo "NEXT_PUBLIC_ADMIN_SESSION_TTL_HOURS=${{ secrets.NEXT_PUBLIC_ADMIN_SESSION_TTL_HOURS }}"
           } >> .env.production
           echo "--- .env.production ---"
           cat .env.production
