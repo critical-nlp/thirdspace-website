@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { BrandMark } from "@/components/brand-mark";
+import { Footer } from "@/components/footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -52,24 +53,11 @@ export default function RootLayout({
               >
                 Home
               </Link>
-              <Link
-                href="/admin"
-                className="rounded-md px-3 py-2 text-foreground/80 transition-colors hover:bg-muted hover:text-foreground"
-              >
-                Admin
-              </Link>
             </nav>
           </div>
         </header>
         <div className="flex-1">{children}</div>
-        <footer className="border-t border-border bg-muted/40">
-          <div className="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-3 px-6 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
-            <p>© {new Date().getFullYear()} Thirdspace — University of Toronto</p>
-            <p className="text-[10px] uppercase tracking-[0.18em] text-primary/70">
-              University of Toronto
-            </p>
-          </div>
-        </footer>
+        <Footer />
       </body>
     </html>
   );
