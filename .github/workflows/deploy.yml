@@ -27,6 +27,14 @@ jobs:
 
       - run: npm ci
 
+      - name: Write build env from secrets
+        if: env.NEXT_PUBLIC_ADMIN_EMAIL != ''
+        run: |
+          {
+            echo "NEXT_PUBLIC_ADMIN_EMAIL=${{ secrets.NEXT_PUBLIC_ADMIN_EMAIL }}"
+            echo "NEXT_PUBLIC_ADMIN_PASSWORD=${{ secrets.NEXT_PUBLIC_ADMIN_PASSWORD }}"
+          } >> .env.production
+
       - run: npm run build
 
       - run: touch out/.nojekyll

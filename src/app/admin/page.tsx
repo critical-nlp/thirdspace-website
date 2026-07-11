@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import bcrypt from "bcryptjs";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,39 +13,32 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { ADMIN_EMAIL, ADMIN_PASSWORD_HASH } from "@/lib/admin-credentials";
+import { ADMIN_EMAIL, ADMIN_PASSWORD } from "@/lib/admin-credentials";
 
 const SESSION_KEY = "thirdspace_admin_ok";
 
 export default function AdminPage() {
   const [unlocked, setUnlocked] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [pending, setPending] = useState(false);
 
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
-    setPending(true);
 
     const form = new FormData(e.currentTarget);
     const email = String(form.get("email") ?? "").trim();
     const password = String(form.get("password") ?? "");
 
-    try {
-      if (email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
-        setError("Invalid credentials");
-        return;
-      }
-      const ok = await bcrypt.compare(password, ADMIN_PASSWORD_HASH);
-      if (!ok) {
-        setError("Invalid credentials");
-        return;
-      }
-      sessionStorage.setItem(SESSION_KEY, "1");
-      setUnlocked(true);
-    } finally {
-      setPending(false);
+    if (
+      email.toLowerCase() !== ADMIN_EMAIL.toLowerCase() ||
+      password !== ADMIN_PASSWORD
+    ) {
+      setError("Invalid credentials");
+      return;
     }
+
+    sessionStorage.setItem(SESSION_KEY, "1");
+    setUnlocked(true);
   }
 
   function signOut() {
@@ -125,8 +117,8 @@ export default function AdminPage() {
               ) : null}
             </CardContent>
             <CardFooter>
-              <Button type="submit" disabled={pending} className="w-full">
-                {pending ? "Checking..." : "Sign in"}
+              <Button type="submit" className="w-full">
+                Sign in
               </Button>
             </CardFooter>
           </form>
