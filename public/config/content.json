@@ -7,30 +7,34 @@
     ]
   },
   "hero": {
-    "badge": "Now active at the University of Toronto",
-    "title": "Thirdspace at UofT.",
-    "description": "A community for students, faculty, and staff at the University of Toronto. Connect, attend events, and find your people across all three campuses.",
-    "primaryActionText": "Join the community",
-    "secondaryActionText": "Upcoming events"
+    "badge": "Welcome to ThirdSpace!",
+    "title": "Utilizing human values, situated knowledge, and experiences for developing impactful solutions.",
+    "description": "The Third Space research group, led by Prof. Ishtiaque Ahmed at the University of Toronto, studies the social, ethical, and political dimensions of computing and artificial intelligence. The group works at the intersection of human-computer interaction (HCI), AI, and critical computing to understand how technologies shape—and are shaped by—everyday life practices, particularly in contexts of marginalization and global development, centering communities that are often overlooked in mainstream computing research.",
+    "primaryActionText": "Learn More",
+    "secondaryActionText": "Research Group"
+  },
+  "about": {
+    "title": "About the Group",
+    "body": "Through empirical and design-oriented research, the group develops and studies socio-technical systems that support more responsible, participatory, and context-aware forms of AI and digital technologies. Their work is grounded in collaboration with communities and draws on interdisciplinary perspectives to reimagine how computing systems can better serve diverse human values and needs."
   },
   "pillars": [
     {
       "id": "pillar-community",
       "icon": "Users",
-      "title": "Community",
-      "body": "Find your people across the three campuses. Study groups, socials, and shared interests."
+      "title": "Empirical Research",
+      "body": "Through empirical and design-oriented research, we develop and study socio-technical systems that support more responsible, participatory, and context-aware forms of AI and digital technologies."
     },
     {
       "id": "pillar-events",
       "icon": "Calendar",
-      "title": "Events",
-      "body": "Workshops, panels, mixers, and signature gatherings throughout the academic year."
+      "title": "Community Grounding",
+      "body": "Our work is grounded in collaboration with communities and draws on interdisciplinary perspectives to reimagine how computing systems can better serve diverse human values."
     },
     {
       "id": "pillar-resources",
       "icon": "Sparkles",
-      "title": "Resources",
-      "body": "Curated guides, mentors, and tools to help you thrive at U of T."
+      "title": "Responsible Tech",
+      "body": "Developing impactful systems that prioritize marginalization contexts and centering communities often overlooked in mainstream computing."
     }
   ],
   "researchLabs": {
@@ -81,6 +85,6 @@
   "brand": {
     "name": "Thirdspace",
     "tagline": "UofT",
-    "footerDescription": "An interactive student community, research space, and hub for student collaboration and engagement across the University of Toronto campuses."
+    "footerDescription": "Through empirical and design-oriented research, the group develops and studies socio-technical systems that support more responsible, participatory, and context-aware forms of AI and digital technologies. Led by Prof. Ishtiaque Ahmed at the University of Toronto."
   }
 }

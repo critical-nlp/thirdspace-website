@@ -50,10 +50,11 @@ export function Footer() {
               {socials.email && (
                 <a
                   href={`mailto:${socials.email}`}
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-muted/60 text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary ring-1 ring-border"
-                  aria-label="Email Us"
+                  className="flex min-h-9 items-center gap-2 rounded-full bg-muted/60 px-3 text-sm text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary ring-1 ring-border"
+                  aria-label={`Email ${socials.email}`}
                 >
-                  <Mail className="h-4 w-4" />
+                  <Mail className="h-4 w-4 shrink-0" />
+                  <span className="break-all">{socials.email}</span>
                 </a>
               )}
             </div>
