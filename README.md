@@ -1,36 +1,145 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Thirdspace — Next.js 16 + ShadCN UI
 
-## Getting Started
+A Next.js 16 application with **ShadCN UI** fully integrated, set up using
+guidance from the Context7 MCP for both `shadcn-ui/ui` and `vercel/next.js`.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js** `16.2.10` (App Router, Turbopack)
+- **React** `19.2.4`
+- **TypeScript** `^5`
+- **Tailwind CSS** `^4` (via `@tailwindcss/postcss`)
+- **ESLint** `^9` with `eslint-config-next`
+- **ShadCN UI** (radix base, nova preset, neutral base color)
+- **Lucide** icon library
+- **Radix UI** primitives (installed transitively by ShadCN)
+
+## Project Layout
+
+```
+thirdspace-app/
+├── public/                 # Static assets
+├── src/
+│   ├── app/
+│   │   ├── globals.css     # Tailwind v4 entry + ShadCN CSS variables
+│   │   ├── layout.tsx
+│   │   └── page.tsx        # Sample ShadCN components on the homepage
+│   ├── components/
+│   │   └── ui/             # ShadCN components (button, card, badge, ...)
+│   └── lib/
+│       └── utils.ts        # `cn()` helper (clsx + tailwind-merge)
+├── components.json         # ShadCN config
+├── eslint.config.mjs
+├── next.config.ts
+├── postcss.config.mjs
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup Steps (Reproducible)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Scaffold Next.js 16
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npx --yes create-next-app@latest thirdspace-app \
+  --typescript \
+  --tailwind \
+  --eslint \
+  --app \
+  --src-dir \
+  --turbopack \
+  --import-alias "@/*" \
+  --use-npm \
+  --yes
+```
 
-## Learn More
+Flags explained:
 
-To learn more about Next.js, take a look at the following resources:
+- `--typescript` — strict TS config out of the box
+- `--tailwind` — installs Tailwind v4 with `@tailwindcss/postcss`
+- `--app` — uses the App Router
+- `--src-dir` — keeps app code under `src/`
+- `--turbopack` — enables Turbopack for `next dev`
+- `--import-alias "@/*"` — matches the ShadCN default aliases
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Initialize ShadCN UI
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+cd thirdspace-app
+npx --yes shadcn@latest init \
+  --base radix \
+  --preset nova \
+  --yes \
+  --force
+```
 
-## Deploy on Vercel
+This:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Detects Next.js + Tailwind v4
+- Writes `components.json` (`radix-nova` style, `neutral` base color, CSS
+  variables on, Lucide icons)
+- Installs ShadCN runtime deps
+- Creates `src/lib/utils.ts` with the `cn()` helper
+- Updates `src/app/globals.css` with the ShadCN design tokens
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 3. Add Components
+
+```bash
+npx --yes shadcn@latest add button card badge --yes
+```
+
+Components are dropped into `src/components/ui/`. Add more any time with
+`npx shadcn@latest add <name>` (e.g. `input`, `dialog`, `dropdown-menu`).
+
+### 4. Verify
+
+```bash
+npm run build
+```
+
+The build should complete with `Compiled successfully` and produce a static
+homepage route `/`.
+
+## Sample Usage (Homepage)
+
+`src/app/page.tsx` imports and renders the three added components:
+
+```tsx
+import { Button } from "@/components/ui/button";
+import {
+  Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+```
+
+## Local Development
+
+```bash
+npm install     # only needed on a fresh clone
+npm run dev     # http://localhost:3000 with Turbopack
+npm run build   # production build
+npm run start   # serve the production build
+npm run lint    # eslint (next + ts config)
+```
+
+## Useful Commands
+
+| Goal                          | Command                                       |
+| ----------------------------- | --------------------------------------------- |
+| List available components     | `npx shadcn@latest add`                       |
+| Add a single component        | `npx shadcn@latest add dialog`                |
+| Re-run init non-interactively | `npx shadcn@latest init --preset nova --yes`  |
+| Type-check                    | `npx tsc --noEmit`                            |
+
+## Notes on Tailwind v4
+
+There is no `tailwind.config.js` in this project. Tailwind v4 is configured
+through `postcss.config.mjs` (the `@tailwindcss/postcss` plugin) and
+`src/app/globals.css` via `@import "tailwindcss";` plus ShadCN's CSS variable
+theme. The empty `tailwind.config` field in `components.json` is intentional
+and matches the official ShadCN template.
+
+## References
+
+- Next.js docs — `https://nextjs.org/docs`
+- ShadCN UI docs — `https://ui.shadcn.com/docs`
+- Context7 MCP queries used while building this repo
