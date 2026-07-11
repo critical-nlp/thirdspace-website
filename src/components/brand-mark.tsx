@@ -1,4 +1,5 @@
 import { getAssetPath } from "@/lib/utils";
+import contentData from "../../public/config/content.json";
 
 type BrandMarkProps = {
   className?: string;
@@ -13,6 +14,7 @@ type BrandMarkProps = {
  * "Thirdspace" wordmark with a "UofT" sub-tag.
  */
 export function BrandMark({ className, variant = "color" }: BrandMarkProps) {
+  const { navbar } = contentData;
   // Since the downloaded logo from UofT is the signature blue/red crest
   // with navy text, we use it directly. We use a standard HTML <img> tag
   // because Next.js <Image> optimization is not needed for SVGs and can trigger
@@ -41,7 +43,7 @@ export function BrandMark({ className, variant = "color" }: BrandMarkProps) {
             (variant === "reverse" ? "text-primary-foreground" : "text-primary")
           }
         >
-          Thirdspace
+          {navbar.brandName}
         </span>
         <span
           className={
@@ -51,7 +53,7 @@ export function BrandMark({ className, variant = "color" }: BrandMarkProps) {
               : "text-muted-foreground")
           }
         >
-          UofT
+          {navbar.brandTagline}
         </span>
       </div>
     </div>

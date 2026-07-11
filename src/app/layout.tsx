@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { BrandMark } from "@/components/brand-mark";
 import { Footer } from "@/components/footer";
+import contentData from "../../public/config/content.json";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,6 +32,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { navbar } = contentData;
+
   return (
     <html
       lang="en"
@@ -42,17 +45,20 @@ export default function RootLayout({
             <Link
               href="/"
               className="flex items-center"
-              aria-label="Thirdspace — University of Toronto home"
+              aria-label={`${navbar.brandName} — University of Toronto home`}
             >
               <BrandMark />
             </Link>
             <nav className="flex items-center gap-1 text-sm">
-              <Link
-                href="/"
-                className="rounded-md px-3 py-2 text-foreground/80 transition-colors hover:bg-muted hover:text-foreground"
-              >
-                Home
-              </Link>
+              {navbar.links.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="rounded-md px-3 py-2 text-foreground/80 transition-colors hover:bg-muted hover:text-foreground"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </nav>
           </div>
         </header>

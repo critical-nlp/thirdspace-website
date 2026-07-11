@@ -1,0 +1,86 @@
+{
+  "navbar": {
+    "brandName": "Thirdspace",
+    "brandTagline": "UofT",
+    "links": [
+      { "label": "Home", "href": "/" }
+    ]
+  },
+  "hero": {
+    "badge": "Now active at the University of Toronto",
+    "title": "Thirdspace at UofT.",
+    "description": "A community for students, faculty, and staff at the University of Toronto. Connect, attend events, and find your people across all three campuses.",
+    "primaryActionText": "Join the community",
+    "secondaryActionText": "Upcoming events"
+  },
+  "pillars": [
+    {
+      "id": "pillar-community",
+      "icon": "Users",
+      "title": "Community",
+      "body": "Find your people across the three campuses. Study groups, socials, and shared interests."
+    },
+    {
+      "id": "pillar-events",
+      "icon": "Calendar",
+      "title": "Events",
+      "body": "Workshops, panels, mixers, and signature gatherings throughout the academic year."
+    },
+    {
+      "id": "pillar-resources",
+      "icon": "Sparkles",
+      "title": "Resources",
+      "body": "Curated guides, mentors, and tools to help you thrive at U of T."
+    }
+  ],
+  "researchLabs": {
+    "title": "Research & Labs",
+    "items": [
+      {
+        "name": "Dynamic Graphics Project (DGP)",
+        "url": "https://www.dgp.toronto.edu/",
+        "isExternal": true
+      },
+      {
+        "name": "HCI Research Group",
+        "url": "https://ischool.utoronto.ca/research/research-areas/human-computer-interaction/",
+        "isExternal": true
+      },
+      {
+        "name": "ICT4D Research Group",
+        "url": "",
+        "isExternal": false
+      },
+      {
+        "name": "Department of Computer Science",
+        "url": "https://web.cs.toronto.edu/",
+        "isExternal": true
+      }
+    ]
+  },
+  "campuses": {
+    "title": "Campuses",
+    "items": [
+      { "name": "St. George (UTSG)", "url": "https://www.utoronto.ca/" },
+      { "name": "Mississauga (UTM)", "url": "https://www.utm.utoronto.ca/" },
+      { "name": "Scarborough (UTSC)", "url": "https://www.utsc.utoronto.ca/" }
+    ]
+  },
+  "location": {
+    "title": "Bahen Centre",
+    "coordinates": "43.6601° N, 79.3970° W",
+    "institution": "Bahen Centre for Information Technology",
+    "street": "40 St. George Street",
+    "cityCountry": "Toronto, ON M5S 2E4, Canada",
+    "mapsQuery": "Bahen+Centre+for+Information+Technology+40+St.+George+St+Toronto+ON+M5S+2E4+Canada"
+  },
+  "socials": {
+    "xUrl": "https://x.com/SpaceUoft",
+    "email": "thirdspace@dgp.toronto.edu"
+  },
+  "brand": {
+    "name": "Thirdspace",
+    "tagline": "UofT",
+    "footerDescription": "An interactive student community, research space, and hub for student collaboration and engagement across the University of Toronto campuses."
+  }
+}
