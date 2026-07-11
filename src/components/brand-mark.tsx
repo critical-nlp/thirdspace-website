@@ -1,3 +1,5 @@
+import { getAssetPath } from "@/lib/utils";
+
 type BrandMarkProps = {
   className?: string;
   variant?: "color" | "reverse";
@@ -22,7 +24,7 @@ export function BrandMark({ className, variant = "color" }: BrandMarkProps) {
       }
     >
       <img
-        src="/uoft-logo.svg"
+        src={getAssetPath("/uoft-logo.svg")}
         alt="University of Toronto"
         width={150}
         height={40}
