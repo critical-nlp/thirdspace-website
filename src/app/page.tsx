@@ -10,6 +10,7 @@ import {
   HeartHandshake,
   MapPin,
   Microscope,
+  MoveUpRight,
   Orbit,
   Quote,
   Scale,
@@ -73,7 +74,6 @@ export default function Home() {
               Vol. 01 · 2026
             </span>
           </div>
-
           {/* Headline + lede */}
           <div className="grid gap-12 md:gap-16 lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-8">
@@ -166,125 +166,163 @@ export default function Home() {
                 className="flex items-center gap-4 px-6 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground whitespace-nowrap"
               >
                 <span>{keyword}</span>
-                <span aria-hidden className="h-1 w-1 rounded-full bg-primary/40" />
+                <span
+                  aria-hidden
+                  className="h-1 w-1 rounded-full bg-primary/40"
+                />
               </div>
             ))}
           </div>
         </div>
       </section>
-
       {/* GROUP OVERVIEW — wide editorial block, hairline-bordered, professor profile alongside */}
       <section
         id="about-group"
-        className="scroll-mt-24 border-b border-border"
+        className="relative scroll-mt-24 px-6 py-14 md:py-20 border-b border-border"
       >
-        <div className="mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="mb-10 flex items-baseline justify-between gap-6 border-b border-border pb-4">
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-              01 · {groupOverview.eyebrow}
-            </span>
-            <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-              <span aria-hidden className="size-1.5 rounded-full bg-emerald-500" />
-              {groupOverview.locationChip}
-            </span>
-          </div>
+        <div className="relative mx-auto w-full max-w-[1232px]">
+          <div className="relative overflow-hidden rounded-[2rem] border border-primary/15 bg-card/85 shadow-2xl shadow-primary/10 backdrop-blur">
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,transparent_0%,transparent_54%,var(--accent)_54%,transparent_55%)] opacity-25" />
+            <div className="pointer-events-none absolute bottom-0 left-0 h-28 w-full bg-gradient-to-t from-primary/5 to-transparent" />
+            <div className="grid gap-0 items-stretch lg:grid-cols-[minmax(0,1fr)_380px]">
+              <div className="relative p-6 md:p-10 lg:p-12">
+                <div className="mb-7 flex flex-wrap items-center justify-between gap-4 border-b border-border/80 pb-5">
+                  <div>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                      01 · {groupOverview.eyebrow}
+                    </span>
+                    <h2 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-foreground md:text-3xl">
+                      {groupOverview.headline}
+                    </h2>
+                  </div>
+                  <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-muted-foreground">
+                    <span className="h-2 w-2 rounded-full bg-primary ring-4 ring-primary/10" />
+                    {groupOverview.locationChip}
+                  </span>
+                </div>
 
-          <div className="grid gap-12 md:gap-16 lg:grid-cols-12">
-            <div className="lg:col-span-8">
-              <h2 className="font-heading text-3xl font-medium leading-[1.1] tracking-[-0.03em] text-foreground sm:text-4xl md:text-5xl">
-                {groupOverview.headline}
-              </h2>
-              <p className="mt-8 max-w-2xl text-pretty text-base leading-7 text-muted-foreground">
-                {groupOverview.body.split(professor.name)[0]}
-                <a
-                  href={professor.website}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-foreground underline decoration-primary/40 decoration-1 underline-offset-[5px] transition-colors hover:decoration-primary"
-                  aria-label={`Visit ${professor.name}'s website`}
-                >
-                  {professor.name}
-                </a>
-                {groupOverview.body.split(professor.name)[1]}
-              </p>
-
-              {/* Focus index — hairline list, no cards */}
-              <ol className="mt-12 border-t border-border">
-                {groupOverview.focusCards.map((item, index) => {
-                  const Icon =
-                    iconMap[item.icon as IconName] ?? iconMap.Globe;
-                  return (
-                    <li
-                      key={item.title}
-                      className="group/focus border-b border-border"
-                    >
-                      <div className="grid gap-4 py-5 sm:grid-cols-12 sm:items-baseline sm:gap-6 sm:py-6">
-                        <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:col-span-1">
-                          {String(index + 1).padStart(2, "0")}
+                <p className="text-pretty text-base leading-8 text-foreground/90 md:text-lg md:leading-9">
+                  {groupOverview.body.split(professor.name)[0]}
+                  <a
+                    href={professor.website}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group/ishtiaque relative inline-flex items-baseline font-semibold text-primary underline decoration-accent/70 decoration-2 underline-offset-4 transition-colors after:absolute after:left-0 after:top-full after:h-8 after:w-72 after:content-[''] hover:text-primary/80"
+                    aria-label={`Visit ${professor.name}'s website`}
+                  >
+                    {professor.name}
+                    <span className="invisible pointer-events-auto absolute left-0 top-full z-50 mt-4 w-72 translate-y-3 rounded-[1.5rem] border border-primary/15 bg-card p-3 opacity-0 shadow-2xl shadow-primary/20 transition-all delay-300 duration-300 before:absolute before:-top-4 before:left-0 before:h-4 before:w-full before:content-[''] group-hover/ishtiaque:visible group-hover/ishtiaque:translate-y-1 group-hover/ishtiaque:opacity-100 group-hover/ishtiaque:delay-75">
+                      <span className="block relative h-52 w-full overflow-hidden rounded-[1.1rem] bg-muted">
+                        <Image
+                          src={getAssetPath(professor.imagePath)}
+                          alt={professor.name}
+                          fill
+                          sizes="288px"
+                          className="object-cover transition-transform duration-500 group-hover/ishtiaque:scale-105"
+                        />
+                      </span>
+                      <span className="mt-3 flex items-center justify-between gap-3 px-1 text-left">
+                        <span>
+                          <span className="block text-sm font-semibold text-foreground">
+                            {professor.name}
+                          </span>
+                          <span className="mt-1 block text-xs leading-5 text-muted-foreground">
+                            {professor.title}
+                            <br />
+                            {professor.department}
+                            <br />
+                            {professor.institution}
+                            <br />
+                            {professor.role}
+                          </span>
                         </span>
-                        <div className="flex items-start gap-3 sm:col-span-11 sm:gap-4">
-                          <Icon className="mt-0.5 size-4 shrink-0 text-primary" />
-                          <div className="flex-1">
-                            <h3 className="font-heading text-base font-medium tracking-[-0.015em] text-foreground">
+                        <MoveUpRight className="h-4 w-4 text-primary" />
+                      </span>
+                    </span>
+                  </a>
+                  {groupOverview.body.split(professor.name)[1]}
+                </p>
+
+                <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                  {groupOverview.focusCards.map((item, index) => {
+                    const Icon =
+                      iconMap[item.icon as keyof typeof iconMap] || Globe;
+
+                    return (
+                      <div
+                        key={item.title}
+                        className="group/focus relative min-h-36 overflow-hidden rounded-[1.4rem] border border-primary/10 bg-background/70 p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:bg-card hover:shadow-xl hover:shadow-primary/10"
+                      >
+                        <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/5 transition-transform duration-500 group-hover/focus:scale-125" />
+                        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary via-accent to-primary opacity-40" />
+
+                        <div className="relative flex h-full flex-col justify-between gap-6">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-primary/10 bg-primary/8 text-primary transition-colors group-hover/focus:bg-primary group-hover/focus:text-primary-foreground">
+                              <Icon className="h-4 w-4" />
+                            </div>
+                            <span className="rounded-full border border-border bg-muted/70 px-2.5 py-1 font-mono text-[0.58rem] uppercase tracking-[0.2em] text-muted-foreground">
+                              0{index + 1} / {item.label}
+                            </span>
+                          </div>
+
+                          <div>
+                            <h3 className="text-sm font-semibold leading-snug tracking-[-0.02em] text-foreground">
                               {item.title}
-                              <span className="ml-2 font-mono text-[10px] font-normal uppercase tracking-[0.18em] text-muted-foreground">
-                                · {item.label}
-                              </span>
                             </h3>
-                            <p className="mt-1.5 max-w-prose text-sm leading-6 text-muted-foreground">
+                            <p className="mt-2 text-xs leading-5 text-muted-foreground">
                               {item.description}
                             </p>
                           </div>
                         </div>
                       </div>
-                    </li>
-                  );
-                })}
-              </ol>
-            </div>
+                    );
+                  })}
+                </div>
+              </div>
 
-            <aside className="lg:col-span-4 lg:pl-2">
-              <div className="lg:sticky lg:top-28">
-                <a
-                  href={professor.website}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Visit ${professor.name}'s website`}
-                  className="group/profile block"
-                >
-                  <div className="relative aspect-[3/4] w-full overflow-hidden bg-muted">
-                    <Image
-                      src={getAssetPath(professor.imagePath)}
-                      alt={professor.name}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, 100vw"
-                      className="object-cover grayscale transition-[filter] duration-500 group-hover/profile:grayscale-0"
-                    />
-                  </div>
-                  <p className="mt-3 flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                    <span>Fig. 02 · {professor.name}</span>
-                    <ArrowUpRight className="size-3 transition-transform group-hover/profile:-translate-y-0.5 group-hover/profile:translate-x-0.5" />
-                  </p>
-                  <div className="mt-4 space-y-1.5 border-t border-border pt-4">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                      {professor.title}
-                    </p>
-                    <p className="font-heading text-lg font-medium tracking-[-0.02em] text-foreground">
-                      {professor.name}
-                    </p>
-                    <p className="text-sm leading-relaxed text-muted-foreground">
-                      {professor.department}, {professor.institution}.
-                      <br />
+              <a
+                href={professor.website}
+                target="_blank"
+                rel="noreferrer"
+                className="group/profile relative min-h-[360px] overflow-hidden rounded-b-[2rem] border-t border-border bg-primary text-primary-foreground lg:rounded-bl-none lg:rounded-r-[2rem] lg:border-l lg:border-t-0"
+                aria-label={`Visit ${professor.name}'s website`}
+              >
+                <Image
+                  src={getAssetPath(professor.imagePath)}
+                  alt={professor.name}
+                  fill
+                  sizes="(min-width: 1024px) 340px, 100vw"
+                  className="object-cover opacity-80 transition duration-700 group-hover/profile:scale-105 group-hover/profile:opacity-95"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/45 to-transparent" />
+                <div className="absolute left-5 top-5 rounded-full border border-white/20 bg-white/15 px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.22em] backdrop-blur">
+                  {groupOverview.glanceLabel}
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <div className="rounded-[1.4rem] border border-white/15 bg-white/12 p-4 backdrop-blur-md transition-transform duration-300 group-hover/profile:-translate-y-1">
+                    <div className="flex items-end justify-between gap-4">
+                      <div>
+                        <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-primary-foreground/70">
+                          <span>Fig. 02 · {professor.title}</span>
+                        </p>
+                        <p className="mt-1 text-xl font-semibold tracking-[-0.03em]">
+                          {professor.name}
+                        </p>
+                      </div>
+                      <MoveUpRight className="h-5 w-5" />
+                    </div>
+                    <p className="mt-3 text-sm leading-6 text-primary-foreground/78">
+                      {professor.department}, {professor.institution}.<br />
                       {professor.role}.
                     </p>
                   </div>
-                </a>
-              </div>
-            </aside>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </section>
-
       {/* ABOUT THE GROUP — quote, hairline-left accent */}
       {about && (
         <section className="border-b border-border bg-muted/30">
@@ -322,7 +360,10 @@ export default function Home() {
               </h2>
             </div>
             <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-              <span aria-hidden className="size-1.5 rounded-full bg-emerald-500" />
+              <span
+                aria-hidden
+                className="size-1.5 rounded-full bg-emerald-500"
+              />
               {researchDomains.statusLabel}
             </span>
           </div>
@@ -369,8 +410,7 @@ export default function Home() {
 
           <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
             {pillars.map((pillar, index) => {
-              const Icon =
-                iconMap[pillar.icon as IconName] ?? iconMap.Sparkles;
+              const Icon = iconMap[pillar.icon as IconName] ?? iconMap.Sparkles;
               return (
                 <article
                   key={pillar.id}
