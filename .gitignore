@@ -11,6 +11,8 @@
 !.yarn/versions
 
 /.trae/
+/.claude/
+/CLAUDE.md
 # testing
 /coverage
 

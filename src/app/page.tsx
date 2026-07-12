@@ -27,6 +27,7 @@ import {
   MoveUpRight,
 } from "lucide-react";
 import contentData from "../../public/config/content.json";
+import { getAssetPath } from "@/lib/utils";
 
 // Map icon name strings (from JSON) to Lucide component references
 const iconMap = {
@@ -195,13 +196,13 @@ export default function Home() {
                     >
                       {professor.name}
                       <span className="invisible pointer-events-auto absolute left-0 top-full z-50 mt-4 w-72 translate-y-3 rounded-[1.5rem] border border-primary/15 bg-card p-3 opacity-0 shadow-2xl shadow-primary/20 transition-all delay-300 duration-300 before:absolute before:-top-4 before:left-0 before:h-4 before:w-full before:content-[''] group-hover/ishtiaque:visible group-hover/ishtiaque:translate-y-1 group-hover/ishtiaque:opacity-100 group-hover/ishtiaque:delay-75">
-                        <span className="block overflow-hidden rounded-[1.1rem] bg-muted">
+                        <span className="block relative h-52 w-full overflow-hidden rounded-[1.1rem] bg-muted">
                           <Image
-                            src={professor.imagePath}
+                            src={getAssetPath(professor.imagePath)}
                             alt={professor.name}
-                            width={288}
-                            height={208}
-                            className="h-52 w-full object-cover transition-transform duration-500 group-hover/ishtiaque:scale-105"
+                            fill
+                            sizes="288px"
+                            className="object-cover transition-transform duration-500 group-hover/ishtiaque:scale-105"
                           />
                         </span>
                         <span className="mt-3 flex items-center justify-between gap-3 px-1 text-left">
@@ -268,7 +269,7 @@ export default function Home() {
                   aria-label={`Visit ${professor.name}'s website`}
                 >
                   <Image
-                    src={professor.imagePath}
+                    src={getAssetPath(professor.imagePath)}
                     alt={professor.name}
                     fill
                     sizes="(min-width: 1024px) 340px, 100vw"
