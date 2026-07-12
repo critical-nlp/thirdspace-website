@@ -18,6 +18,13 @@ type Member = {
   links?: { label: string; url: string }[];
 };
 
+type AlumniMember = {
+  name: string;
+  role?: string;
+  currentPosition?: string;
+  currentAffiliation?: string;
+};
+
 function initials(name: string): string {
   return name
     .replace(/^(Prof\.|Dr\.|Mr\.|Ms\.|Mrs\.)\s+/i, "")
@@ -178,7 +185,7 @@ export default function TeamPage() {
             </span>
           </div>
           <ul className="divide-y divide-border rounded-2xl border border-border bg-card">
-            {team.alumni.members.map((m, i) => (
+            {(team.alumni.members as AlumniMember[]).map((m, i) => (
               <li
                 key={`${m.name}-${i}`}
                 className="flex flex-col gap-1 px-5 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"

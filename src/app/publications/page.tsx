@@ -28,6 +28,15 @@ type YearBucket = {
   researchArtifacts?: Pub[];
 };
 
+type Book = {
+  title?: string;
+  authors?: string;
+  year?: string;
+  description?: string;
+  url?: string;
+  coverImagePath?: string;
+};
+
 function PubRow({ pub }: { pub: Pub }) {
   const titleEl = pub.url ? (
     <Link
@@ -109,7 +118,9 @@ function PubSubsection({
 
 export default function PublicationsPage() {
   const { publications } = contentData;
-  const yearKeys = Object.keys(publications.years).sort((a, b) =>
+  const books = (publications.books ?? []) as Book[];
+  const years = (publications.years ?? {}) as Record<string, YearBucket>;
+  const yearKeys = Object.keys(years).sort((a, b) =>
     a < b ? 1 : a > b ? -1 : 0,
   );
 
@@ -126,13 +137,13 @@ export default function PublicationsPage() {
       </section>
 
       {/* Books */}
-      {publications.books && publications.books.length > 0 && (
+      {books.length > 0 && (
         <section className="mx-auto w-full max-w-6xl px-6 py-12">
           <h2 className="mb-6 font-heading text-2xl font-semibold text-foreground">
             Books
           </h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {publications.books.map((book, i) => (
+            {books.map((book, i) => (
               <article
                 key={`${book.title}-${i}`}
                 className="flex gap-5 rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
@@ -193,7 +204,7 @@ export default function PublicationsPage() {
 
       {/* Year-grouped publications */}
       {yearKeys.map((year) => {
-        const bucket = publications.years[year] as YearBucket;
+        const bucket = years[year];
         const total =
           (bucket.journalArticles?.length ?? 0) +
           (bucket.conferenceProceedings?.length ?? 0) +
@@ -234,7 +245,7 @@ export default function PublicationsPage() {
       })}
 
       {/* Empty state */}
-      {publications.books.length === 0 && yearKeys.length === 0 && (
+      {books.length === 0 && yearKeys.length === 0 && (
         <section className="mx-auto w-full max-w-6xl px-6 pb-24">
           <p className="text-sm text-muted-foreground">
             No publications yet — check back soon.
