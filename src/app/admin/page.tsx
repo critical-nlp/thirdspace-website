@@ -1035,6 +1035,14 @@ function SignedInView({
                         <Label className="text-[10px] font-mono uppercase text-muted-foreground">Focus Value</Label>
                         <Input value={content.hero.focusValue ?? ""} onChange={(e) => handleFieldChange("hero", "focusValue", e.target.value)} className="text-xs" />
                       </div>
+                      <div className="space-y-1">
+                        <Label className="text-[10px] font-mono uppercase text-muted-foreground">Group Photo Path (from /public/group-photos)</Label>
+                        <Input value={content.hero.groupPhotoPath ?? ""} onChange={(e) => handleFieldChange("hero", "groupPhotoPath", e.target.value)} placeholder="/group-photos/group_photo_crp.PNG" className="font-mono text-xs" />
+                      </div>
+                      <div className="space-y-1">
+                        <Label className="text-[10px] font-mono uppercase text-muted-foreground">Group Photo Alt Text</Label>
+                        <Input value={content.hero.groupPhotoAlt ?? ""} onChange={(e) => handleFieldChange("hero", "groupPhotoAlt", e.target.value)} className="text-xs" />
+                      </div>
                     </div>
                   </div>
                 </div>

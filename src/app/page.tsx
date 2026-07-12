@@ -61,8 +61,8 @@ export default function Home() {
 
         {/* Editorial hero content */}
         <div className="relative mx-auto w-full max-w-7xl px-6 py-14 md:py-20">
-          <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
-            <div className="relative overflow-hidden rounded-[2rem] border border-primary/15 bg-card/75 p-6 shadow-2xl shadow-primary/10 backdrop-blur md:p-10 lg:p-12">
+          <div className="grid items-stretch gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,300px)] lg:grid-cols-[minmax(0,1fr)_380px]">
+            <div className="relative min-w-0 overflow-hidden rounded-[2rem] border border-primary/15 bg-card/75 p-6 shadow-2xl shadow-primary/10 backdrop-blur sm:p-8 md:p-7 lg:p-10 xl:p-12">
               <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,transparent_0%,transparent_54%,var(--accent)_54%,transparent_55%)] opacity-25" />
               <div className="pointer-events-none absolute -right-20 -top-24 h-60 w-60 rounded-full border border-primary/10 bg-primary/5" />
               <div className="pointer-events-none absolute bottom-0 left-0 h-28 w-full bg-gradient-to-t from-primary/5 to-transparent" />
@@ -80,21 +80,21 @@ export default function Home() {
                 </div>
 
                 <div className="max-w-5xl space-y-3 tracking-[-0.055em] text-foreground">
-                  <h1 className="text-balance text-5xl font-semibold leading-[0.86] sm:text-6xl md:text-7xl lg:text-[6.8rem]">
+                  <h1 className="text-balance text-5xl font-semibold leading-[0.86] sm:text-6xl md:text-5xl lg:text-6xl xl:text-[6.8rem]">
                     {hero.headlineLine1}
                   </h1>
-                  <h2 className="text-balance text-4xl font-semibold leading-[0.9] text-foreground/88 sm:text-5xl md:text-6xl lg:text-[5.2rem]">
+                  <h2 className="text-balance text-4xl font-semibold leading-[0.9] text-foreground/88 sm:text-5xl md:text-4xl lg:text-5xl xl:text-[5.2rem]">
                     {hero.headlineLine2}
                   </h2>
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                     <span className="h-px w-24 bg-primary/35" />
-                    <h3 className="text-balance text-3xl font-semibold leading-tight text-primary sm:text-4xl md:text-5xl lg:text-6xl">
+                    <h3 className="text-balance text-3xl font-semibold leading-tight text-primary sm:text-4xl md:text-3xl lg:text-4xl xl:text-5xl">
                       {hero.headlineLine3}
                     </h3>
                   </div>
                 </div>
 
-                <div className="grid gap-5 border-t border-border/80 pt-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+                <div className="grid gap-5 border-t border-border/80 pt-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
                   <p className="max-w-2xl text-pretty text-sm leading-7 text-muted-foreground md:text-base">
                     {hero.subParagraph}
                   </p>
@@ -111,7 +111,25 @@ export default function Home() {
               </div>
             </div>
 
-            <aside className="relative grid gap-4 lg:pb-4">
+            <aside className="relative grid auto-rows-min gap-4 lg:pb-0">
+              <div className="relative overflow-hidden rounded-[1.75rem] border border-border bg-card shadow-2xl shadow-primary/10">
+                <div className="relative aspect-[4/3] w-full">
+                  <Image
+                    src={getAssetPath(hero.groupPhotoPath)}
+                    alt={hero.groupPhotoAlt}
+                    fill
+                    sizes="(min-width: 1024px) 380px, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/85 via-primary/40 to-transparent p-4">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/15 px-3 py-1 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-white backdrop-blur">
+                    <Users className="h-3.5 w-3.5" />
+                    {hero.locationChip}
+                  </span>
+                </div>
+              </div>
+
               <div className="rounded-[1.75rem] border border-border bg-primary p-5 text-primary-foreground shadow-2xl shadow-primary/20">
                 <div className="mb-10 flex items-center justify-between text-primary-foreground/70">
                   <span className="font-mono text-[0.65rem] uppercase tracking-[0.24em]">
@@ -134,7 +152,7 @@ export default function Home() {
                     {hero.methodsValue}
                   </p>
                 </div>
-                <div className="group rounded-[1.5rem] border border-accent/45 bg-accent/40 p-4 shadow-sm transition-transform hover:-translate-y-1">
+                <div className="group rounded-[1.5rem] border border-accent/60 bg-accent/70 p-4 shadow-sm transition-transform hover:-translate-y-1">
                   <MoveUpRight className="mb-8 h-5 w-5 text-accent-foreground" />
                   <p className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-accent-foreground/70">
                     {hero.focusLabel}
@@ -163,14 +181,13 @@ export default function Home() {
         </div>
 
         {/* Group overview */}
-        <div id="about-group" className="relative scroll-mt-24 px-6 py-14 md:py-18">
-          <div className="relative mx-auto max-w-6xl">
-            <div className="absolute -inset-6 rounded-[2.5rem] bg-[radial-gradient(circle_at_20%_20%,var(--accent),transparent_26%),radial-gradient(circle_at_85%_15%,var(--primary),transparent_24%)] opacity-15 blur-3xl" />
-            <div className="relative overflow-visible rounded-[2rem] border border-primary/15 bg-card/85 shadow-2xl shadow-primary/10 backdrop-blur">
-              <div className="pointer-events-none absolute right-6 top-6 h-48 w-48 rounded-full border border-primary/10 bg-primary/5" />
+        <div id="about-group" className="relative scroll-mt-24 px-6 py-14 md:py-20">
+          <div className="relative mx-auto w-full max-w-[1232px]">
+            <div className="relative overflow-hidden rounded-[2rem] border border-primary/15 bg-card/85 shadow-2xl shadow-primary/10 backdrop-blur">
+              <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full border border-primary/10 bg-primary/5" />
 
-              <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_340px]">
-                <div className="relative p-6 md:p-9 lg:p-10">
+              <div className="grid gap-0 items-stretch lg:grid-cols-[minmax(0,1fr)_380px]">
+                <div className="relative p-6 md:p-10 lg:p-12">
                   <div className="mb-7 flex flex-wrap items-center justify-between gap-4 border-b border-border/80 pb-5">
                     <div>
                       <span className="font-mono text-[0.65rem] uppercase tracking-[0.28em] text-primary">
