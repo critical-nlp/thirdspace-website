@@ -1,12 +1,8 @@
 import Link from "next/link";
-import { Mail, MapPin } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin } from "lucide-react";
 import type { Metadata } from "next";
+
 import contentData from "../../../public/config/content.json";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
 
 export const metadata: Metadata = {
   title: contentData.contact.pageTitle,
@@ -14,125 +10,206 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const { contact, location, socials } = contentData;
+  const { contact, location, socials, professor } = contentData;
 
   return (
     <main className="bg-background">
       {/* Hero */}
-      <section className="mx-auto w-full max-w-4xl px-6 pt-16 pb-12 sm:pt-24">
-        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-          {contact.eyebrow}
-        </p>
-        <h1 className="mt-3 font-heading text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-          {contact.headline}
-        </h1>
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-          {contact.body}
-        </p>
+      <section className="border-b border-border">
+        <div className="mx-auto w-full max-w-6xl px-5 pt-16 pb-16 sm:px-8 sm:pt-24 sm:pb-20">
+          <div className="mb-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-border pb-4">
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+              {contact.eyebrow}
+            </span>
+            <span className="hidden h-3 w-px bg-border sm:block" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+              Response time · 3–5 working days
+            </span>
+          </div>
+
+          <div className="grid gap-10 lg:grid-cols-12">
+            <h1 className="font-heading text-[clamp(2.25rem,5vw,4.5rem)] font-medium leading-[1.02] tracking-[-0.035em] text-foreground lg:col-span-8">
+              {contact.headline}
+            </h1>
+            <p className="max-w-prose text-pretty text-base leading-7 text-muted-foreground lg:col-span-4 lg:pt-3">
+              {contact.body}
+            </p>
+          </div>
+        </div>
       </section>
 
-      {/* Direct contact + Office */}
-      <section className="mx-auto grid w-full max-w-6xl gap-6 px-6 py-8 sm:grid-cols-2">
-        {/* Email card */}
-        <article className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
-          <div className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary ring-1 ring-primary/20">
-            <Mail className="size-4" />
+      {/* Contact index — two hairline rows */}
+      <section className="border-b border-border">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+          <div className="mb-6 flex items-baseline justify-between gap-6 border-b border-border pb-4">
+            <div className="flex items-baseline gap-4">
+              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                01
+              </span>
+              <h2 className="font-heading text-2xl font-medium tracking-[-0.025em] text-foreground sm:text-3xl">
+                Direct channels
+              </h2>
+            </div>
           </div>
-          <div>
-            <h2 className="font-heading text-base font-semibold text-foreground">
-              {contact.emailLabel}
-            </h2>
-            <Link
-              href={`mailto:${socials.email}`}
-              className="mt-2 inline-block font-mono text-sm text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
-            >
-              {socials.email}
-            </Link>
-          </div>
-        </article>
 
-        {/* Office card */}
-        <HoverCard openDelay={150} closeDelay={150}>
-          <HoverCardTrigger asChild>
-            <article className="flex cursor-pointer flex-col gap-4 rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
-              <div className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary ring-1 ring-primary/20">
-                <MapPin className="size-4" />
+          <ul className="border-t border-border">
+            {/* Email */}
+            <li className="grid grid-cols-12 items-baseline gap-x-6 gap-y-3 border-b border-border py-7 sm:py-8">
+              <span className="col-span-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:col-span-1">
+                01
+              </span>
+              <div className="col-span-10 flex items-center gap-3 sm:col-span-3">
+                <Mail className="size-4 shrink-0 text-primary" />
+                <h3 className="font-heading text-base font-medium tracking-[-0.015em] text-foreground">
+                  {contact.emailLabel}
+                </h3>
               </div>
-              <div>
-                <h2 className="font-heading text-base font-semibold text-foreground">
+              <div className="col-span-12 sm:col-span-8">
+                <Link
+                  href={`mailto:${socials.email}`}
+                  className="inline-flex items-center gap-1.5 font-mono text-sm text-foreground underline decoration-primary/40 decoration-1 underline-offset-[5px] transition-colors hover:decoration-primary sm:text-base"
+                >
+                  {socials.email}
+                </Link>
+              </div>
+            </li>
+
+            {/* Office */}
+            <li className="grid grid-cols-12 items-baseline gap-x-6 gap-y-3 border-b border-border py-7 sm:py-8">
+              <span className="col-span-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:col-span-1">
+                02
+              </span>
+              <div className="col-span-10 flex items-center gap-3 sm:col-span-3">
+                <MapPin className="size-4 shrink-0 text-primary" />
+                <h3 className="font-heading text-base font-medium tracking-[-0.015em] text-foreground">
                   Office
-                </h2>
-                <p className="mt-2 text-sm leading-relaxed text-foreground">
-                  {location.institution}
-                </p>
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                </h3>
+              </div>
+              <div className="col-span-12 sm:col-span-8">
+                <p className="font-medium text-foreground">{location.institution}</p>
+                <p className="mt-1 text-sm leading-6 text-muted-foreground">
                   {location.title}
-                </p>
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                  <br />
                   {location.street}
-                </p>
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                  <br />
                   {location.cityCountry}
                 </p>
+                <Link
+                  href={`https://maps.google.com/?q=${location.mapsQuery}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.22em] text-primary underline decoration-primary/40 decoration-1 underline-offset-[5px] transition-colors hover:decoration-primary"
+                >
+                  {location.footerMapLabel}
+                  <ArrowUpRight className="size-3" />
+                </Link>
               </div>
-            </article>
-          </HoverCardTrigger>
-          <HoverCardContent className="w-80 overflow-hidden p-0">
-            <iframe
-              title={`Map of ${location.title}`}
-              src={`https://maps.google.com/maps?q=${location.mapsQuery}&hl=en&z=15&output=embed`}
-              className="h-48 w-full border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-            <div className="flex items-center justify-between gap-3 px-4 py-3">
-              <span className="text-xs text-muted-foreground">
-                {location.street}
+            </li>
+
+            {/* Lead */}
+            <li className="grid grid-cols-12 items-baseline gap-x-6 gap-y-3 border-b border-border py-7 sm:py-8">
+              <span className="col-span-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:col-span-1">
+                03
               </span>
-              <Link
-                href={`https://maps.google.com/?q=${location.mapsQuery}`}
-                target="_blank"
-                rel="noreferrer"
-                className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
-              >
-                {location.footerMapLabel}
-              </Link>
-            </div>
-          </HoverCardContent>
-        </HoverCard>
+              <div className="col-span-10 sm:col-span-3">
+                <h3 className="font-heading text-base font-medium tracking-[-0.015em] text-foreground">
+                  Principal Investigator
+                </h3>
+              </div>
+              <div className="col-span-12 sm:col-span-8">
+                <p className="font-medium text-foreground">{professor.name}</p>
+                <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                  {professor.title}, {professor.department}
+                </p>
+                {professor.website && (
+                  <Link
+                    href={professor.website}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.22em] text-primary underline decoration-primary/40 decoration-1 underline-offset-[5px] transition-colors hover:decoration-primary"
+                  >
+                    Personal site
+                    <ArrowUpRight className="size-3" />
+                  </Link>
+                )}
+              </div>
+            </li>
+          </ul>
+        </div>
       </section>
 
       {/* Find us online */}
-      <section className="mx-auto w-full max-w-6xl px-6 py-10">
-        <h2 className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-          Find us online
-        </h2>
-        <ul className="mt-4 flex flex-wrap gap-3">
-          {socials.xUrl && (
-            <li>
-              <Link
-                href={socials.xUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm text-foreground transition-all hover:border-primary/40 hover:text-primary"
-              >
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em]">
-                  {socials.xHandle}
+      <section className="border-b border-border">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+          <div className="mb-6 flex items-baseline justify-between gap-6 border-b border-border pb-4">
+            <div className="flex items-baseline gap-4">
+              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                02
+              </span>
+              <h2 className="font-heading text-2xl font-medium tracking-[-0.025em] text-foreground sm:text-3xl">
+                Find us online
+              </h2>
+            </div>
+          </div>
+
+          <ul className="border-t border-border">
+            {socials.xUrl && (
+              <li className="flex items-center justify-between gap-4 border-b border-border py-5">
+                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                  Twitter / X
                 </span>
-              </Link>
-            </li>
-          )}
-        </ul>
+                <Link
+                  href={socials.xUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex items-center gap-2 text-sm text-foreground transition-colors hover:text-primary"
+                >
+                  <span>{socials.xHandle}</span>
+                  <ArrowUpRight className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                </Link>
+              </li>
+            )}
+            {socials.email && (
+              <li className="flex items-center justify-between gap-4 border-b border-border py-5">
+                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                  Email
+                </span>
+                <Link
+                  href={`mailto:${socials.email}`}
+                  className="text-sm text-foreground transition-colors hover:text-primary"
+                >
+                  {socials.email}
+                </Link>
+              </li>
+            )}
+          </ul>
+        </div>
       </section>
 
-      {/* Working with us */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-10 pb-24">
-        <h2 className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-          {contact.connectTitle}
-        </h2>
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-          {contact.connectBody}
-        </p>
+      {/* Working with us — quote treatment */}
+      <section className="bg-muted/30">
+        <div className="mx-auto w-full max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="mb-6 flex items-baseline justify-between gap-6 border-b border-border pb-4">
+            <div className="flex items-baseline gap-4">
+              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                03
+              </span>
+              <h2 className="font-heading text-2xl font-medium tracking-[-0.025em] text-foreground sm:text-3xl">
+                {contact.connectTitle}
+              </h2>
+            </div>
+          </div>
+          <p className="max-w-3xl border-l border-primary pl-6 font-heading text-xl font-medium leading-snug tracking-[-0.02em] text-foreground sm:text-2xl">
+            {contact.connectBody}
+          </p>
+          <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+            <span>Prospective students</span>
+            <span aria-hidden className="h-3 w-px bg-border" />
+            <span>Visiting researchers</span>
+            <span aria-hidden className="h-3 w-px bg-border" />
+            <span>Community partners</span>
+          </div>
+        </div>
       </section>
     </main>
   );

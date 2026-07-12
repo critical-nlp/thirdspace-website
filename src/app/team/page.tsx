@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
+
 import contentData from "../../../public/config/content.json";
 import { getAssetPath } from "@/lib/utils";
 
@@ -25,110 +27,132 @@ type AlumniMember = {
   currentAffiliation?: string;
 };
 
-function initials(name: string): string {
-  return name
-    .replace(/^(Prof\.|Dr\.|Mr\.|Ms\.|Mrs\.)\s+/i, "")
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((w) => w[0]?.toUpperCase() ?? "")
-    .join("");
-}
-
-function MemberCard({ member }: { member: Member }) {
-  const hasImage = !!member.imagePath;
+/**
+ * Editorial member index: portrait + numbered name + role + focus +
+ * outbound links. No card chrome — each member is a hairline-divided
+ * row inside a role section, reading like a journal masthead.
+ */
+function MemberRow({ index, member }: { index: number; member: Member }) {
   const homepage = member.links?.find((l) => l.url);
   const otherLinks = member.links?.filter((l) => l.url).slice(1) ?? [];
+  const hasImage = !!member.imagePath;
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
-      <div className="relative aspect-square w-full overflow-hidden bg-muted">
-        {hasImage ? (
-          <Image
-            src={getAssetPath(member.imagePath!)}
-            alt={member.name}
-            fill
-            sizes="(min-width: 1280px) 280px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover"
-          />
-        ) : (
-          <div
-            className="flex size-full items-center justify-center bg-primary/10 text-3xl font-semibold text-primary"
-            aria-hidden
-          >
-            {initials(member.name)}
+    <article className="grid grid-cols-12 items-start gap-x-6 gap-y-3 border-t border-border py-7 sm:py-8">
+      <span className="col-span-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:col-span-1">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+
+      {hasImage && (
+        <div className="col-span-10 sm:col-span-2">
+          <div className="relative aspect-square w-20 overflow-hidden bg-muted sm:w-24">
+            <Image
+              src={getAssetPath(member.imagePath!)}
+              alt={member.name}
+              fill
+              sizes="96px"
+              className="object-cover grayscale transition-[filter] duration-500 hover:grayscale-0"
+            />
           </div>
-        )}
-      </div>
-      <div className="flex flex-col gap-1.5 p-5">
+        </div>
+      )}
+
+      <div
+        className={
+          "col-span-12 " + (hasImage ? "sm:col-span-6" : "sm:col-span-7")
+        }
+      >
         {homepage ? (
           <Link
             href={homepage.url}
             target="_blank"
             rel="noreferrer"
-            className="text-base font-semibold text-foreground transition-colors hover:text-primary"
+            className="group inline-flex items-baseline gap-1.5 font-heading text-lg font-medium tracking-[-0.02em] text-foreground transition-colors hover:text-primary"
           >
             {member.name}
+            <ArrowUpRight className="size-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
           </Link>
         ) : (
-          <span className="text-base font-semibold text-foreground">
+          <p className="font-heading text-lg font-medium tracking-[-0.02em] text-foreground">
             {member.name}
-          </span>
+          </p>
         )}
         {(member.title || member.role) && (
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
             {member.title || member.role}
           </p>
         )}
         {member.focus && (
-          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-3 max-w-prose text-sm leading-6 text-muted-foreground">
             {member.focus}
           </p>
         )}
+      </div>
+
+      <div
+        className={
+          "col-span-12 " + (hasImage ? "sm:col-span-3" : "sm:col-span-4")
+        }
+      >
         {otherLinks.length > 0 && (
-          <div className="mt-2 flex flex-wrap gap-3">
+          <ul className="flex flex-wrap gap-x-4 gap-y-1.5">
             {otherLinks.map((link, idx) => (
-              <Link
-                key={`${link.label}-${idx}`}
-                href={link.url}
-                target="_blank"
-                rel="noreferrer"
-                className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
-              >
-                {link.label}
-              </Link>
+              <li key={`${link.label}-${idx}`}>
+                <Link
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {link.label}
+                  <ArrowUpRight className="size-2.5" />
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         )}
       </div>
-    </div>
+    </article>
   );
 }
 
 function RoleSection({
-  eyebrow,
+  index,
   role,
   members,
 }: {
-  eyebrow: string;
+  index: number;
   role: string;
   members: Member[];
 }) {
-  if (!members || members.length === 0) return null;
   return (
-    <section className="mx-auto w-full max-w-6xl px-6 py-12">
-      <div className="mb-8 flex items-baseline gap-4">
-        <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-          {eyebrow}
-        </span>
-        <h2 className="font-heading text-2xl font-semibold text-foreground">
-          {role}
-        </h2>
-      </div>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {members.map((m, i) => (
-          <MemberCard key={`${m.name}-${i}`} member={m} />
-        ))}
+    <section className="border-t border-border">
+      <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+        <div className="mb-6 flex items-baseline justify-between gap-6 border-b border-border pb-4">
+          <div className="flex items-baseline gap-4">
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+              {String(index).padStart(2, "0")}
+            </span>
+            <h2 className="font-heading text-2xl font-medium tracking-[-0.025em] text-foreground sm:text-3xl">
+              {role}
+            </h2>
+          </div>
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+            {members.length === 0 ? "—" : `${members.length} members`}
+          </span>
+        </div>
+
+        {members.length === 0 ? (
+          <p className="py-8 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            Open positions · announcements coming soon
+          </p>
+        ) : (
+          <div>
+            {members.map((m, i) => (
+              <MemberRow key={`${m.name}-${i}`} index={i} member={m} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -148,64 +172,108 @@ export default function TeamPage() {
       : [],
   };
 
+  const totalMembers = 1 + team.sections.reduce((acc, s) => {
+    const list = (s.members ?? []) as Member[];
+    return acc + list.length;
+  }, 0);
+
   return (
     <main className="bg-background">
-      {/* Hero */}
-      <section className="mx-auto w-full max-w-6xl px-6 pt-16 pb-8 sm:pt-24">
-        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-          {team.pageEyebrow}
-        </p>
-        <h1 className="mt-3 font-heading text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-          {team.pageHeadline}
-        </h1>
-        <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          {team.pageBody}
-        </p>
+      {/* Hero — meta strip + headline */}
+      <section className="border-b border-border">
+        <div className="mx-auto w-full max-w-6xl px-5 pt-16 pb-16 sm:px-8 sm:pt-24 sm:pb-20">
+          <div className="mb-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-border pb-4">
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+              Roster · {new Date().getFullYear()}
+            </span>
+            <span className="hidden h-3 w-px bg-border sm:block" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+              {totalMembers} active members
+            </span>
+            <span className="hidden h-3 w-px bg-border sm:block" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+              {team.sections.length + 1} sections
+            </span>
+          </div>
+
+          <div className="grid gap-10 lg:grid-cols-12">
+            <h1 className="font-heading text-[clamp(2.25rem,5vw,4.5rem)] font-medium leading-[1.02] tracking-[-0.035em] text-foreground lg:col-span-8">
+              {team.pageHeadline}
+            </h1>
+            <p className="max-w-prose text-pretty text-base leading-7 text-muted-foreground lg:col-span-4 lg:pt-3">
+              {team.pageBody}
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Principal Investigator */}
-      <RoleSection eyebrow="01" role="Principal Investigator" members={[pi]} />
+      <RoleSection index={1} role="Principal Investigator" members={[pi]} />
 
       {/* Other role sections */}
       {team.sections.map((section, idx) => (
         <RoleSection
           key={section.role}
-          eyebrow={String(idx + 2).padStart(2, "0")}
+          index={idx + 2}
           role={section.role}
-          members={section.members as Member[]}
+          members={(section.members ?? []) as Member[]}
         />
       ))}
 
       {/* Alumni */}
-      {team.alumni.members && team.alumni.members.length > 0 && (
-        <section className="mx-auto w-full max-w-6xl px-6 py-12">
-          <div className="mb-8 flex items-baseline gap-4">
+      <section className="border-t border-border">
+        <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+          <div className="mb-6 flex items-baseline justify-between gap-6 border-b border-border pb-4">
+            <div className="flex items-baseline gap-4">
+              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                {String(team.sections.length + 2).padStart(2, "0")}
+              </span>
+              <h2 className="font-heading text-2xl font-medium tracking-[-0.025em] text-foreground sm:text-3xl">
+                {team.alumni.title}
+              </h2>
+            </div>
             <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-              {team.alumni.title}
+              {((team.alumni.members ?? []) as AlumniMember[]).length === 0
+                ? "—"
+                : `${(team.alumni.members ?? []).length} alumni`}
             </span>
           </div>
-          <ul className="divide-y divide-border rounded-2xl border border-border bg-card">
-            {(team.alumni.members as AlumniMember[]).map((m, i) => (
-              <li
-                key={`${m.name}-${i}`}
-                className="flex flex-col gap-1 px-5 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
-              >
-                <div>
-                  <span className="font-medium text-foreground">{m.name}</span>
-                  {m.role && (
-                    <span className="ml-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                      {m.role}
-                    </span>
-                  )}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {[m.currentPosition, m.currentAffiliation].filter(Boolean).join(" · ")}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+
+          {((team.alumni.members ?? []) as AlumniMember[]).length === 0 ? (
+            <p className="py-8 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+              List will be updated as graduates move on
+            </p>
+          ) : (
+            <ul className="border-t border-border">
+              {((team.alumni.members ?? []) as AlumniMember[]).map((m, i) => (
+                <li
+                  key={`${m.name}-${i}`}
+                  className="grid grid-cols-12 items-baseline gap-x-4 gap-y-1 border-b border-border py-5 sm:py-6"
+                >
+                  <span className="col-span-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:col-span-1">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="col-span-10 sm:col-span-5">
+                    <p className="font-heading text-base font-medium tracking-[-0.015em] text-foreground">
+                      {m.name}
+                    </p>
+                    {m.role && (
+                      <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                        {m.role}
+                      </p>
+                    )}
+                  </div>
+                  <p className="col-span-12 text-sm leading-6 text-muted-foreground sm:col-span-6">
+                    {[m.currentPosition, m.currentAffiliation]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
     </main>
   );
 }
