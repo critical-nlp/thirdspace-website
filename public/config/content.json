@@ -305,7 +305,10 @@
     "name": "Thirdspace",
     "tagline": "UofT",
     "copyrightSuffix": "— University of Toronto.",
-    "footerDescription": "Through empirical and design-oriented research, the group develops and studies socio-technical systems that support more responsible, participatory, and context-aware forms of AI and digital technologies. Led by Prof. Ishtiaque Ahmed at the University of Toronto."
+    "footerDescription": "Through empirical and design-oriented research, the group develops and studies socio-technical systems that support more responsible, participatory, and context-aware forms of AI and digital technologies. Led by Prof. Ishtiaque Ahmed at the University of Toronto.",
+    "creditLabel": "Developer",
+    "creditLinkAriaLabel": "View developer profile on GitHub",
+    "creditAuthorUrl": "https://github.com/Raiyan007-gb"
   },
   "publications": {
     "pageTitle": "Publications — Thirdspace | University of Toronto",
@@ -313,7 +316,55 @@
     "pageHeadline": "Books, journal articles, and conference proceedings.",
     "pageSubhead": "Books, journal articles, conference proceedings, and research artifacts from the Thirdspace group, indexed by year.",
     "books": [],
-    "years": {},
+    "years": {
+      "2026": {
+        "label": "2026",
+        "journalArticles": [],
+        "conferenceProceedings": [
+          {
+            "id": "2026-acl-long-1565",
+            "authors": "Md Arid Hasan, Firoj Alam, Md Fahad Hossain, Usman Naseem, Syed Ishtiaque Ahmed",
+            "title": "LLM-Based Multi-Task Bangla Hate Speech Detection: Type, Severity, and Target",
+            "venue": "ACL 2026 (Main)",
+            "url": "https://aclanthology.org/2026.acl-long.1565/"
+          },
+          {
+            "id": "2026-findings-acl-1433",
+            "authors": "Usman Naseem, Robert Geislinger, Juan Ren, Sarah Kohail, Rudy Alexandro Garrido Veliz, P Sam Sahil, Yiran Zhang, Idris Abdulmumin, Marco Antonio Stranisci, Özge Alacam, Cengiz Acarturk, Aisha Jabr, Saba Anwar, Abinew Ali Ayele, Simona Frenda, Alessandra Teresa Cignarella, Elena Tutubalina, Oleg Rogov, Aung Kyaw Htet, Xintong Wang, Surendrabikram Thapa, Kritesh Rauniyar, Tanmoy Chakraborty, MD Arfeen Zeeshan, Dheeraj Kodati, Satya Keerthi, Sahar Moradizeyveh, Firoj Alam, Md Arid Hasan, Syed Ishtiaque Ahmed, Ye Kyaw Thu, Shantipriya Parida, Ihsan Ayyub Qazi, Lilian Diana Awuor Wanzare, Nelson Odhiambo Onyango, Clemencia Siro, Jane Wanjiru Kimani, Ibrahim Said Ahmad, Adem Chanie Ali, Martin Semmann, Chris Biemann, Shamsuddeen Hassan Muhammad, Seid Muhie Yimam",
+            "title": "POLAR: A Benchmark for Multilingual, Multicultural, and Multi-Event Online Polarization",
+            "venue": "ACL 2026 (Findings)",
+            "url": "https://aclanthology.org/2026.findings-acl.1433/"
+          },
+          {
+            "id": "2026-chi-3790605",
+            "authors": "Yasaman Rohanifar, Rachel FJ Levine, Sharifa Sultana, Syed Ishtiaque Ahmed",
+            "title": "Data Migration in HCI: The Politics of Invisible Borders, Informal Networks, and Immigrants' Data",
+            "venue": "CHI 2026",
+            "url": "https://doi.org/10.1145/3772318.3790605",
+            "doi": "10.1145/3772318.3790605"
+          },
+          {
+            "id": "2026-chi-3791553",
+            "authors": "Hellina Hailu Nigatu, Farhana Shahid, Vishal Sharma, Abigail Oppong, Michaelanne Thomas, Syed Ishtiaque Ahmed",
+            "title": "UnWEIRDing Peer Review in Human-Computer Interaction",
+            "venue": "CHI 2026",
+            "url": "https://doi.org/10.1145/3772318.3791553",
+            "doi": "10.1145/3772318.3791553"
+          },
+          {
+            "id": "2026-chi-3791792",
+            "authors": "Dipto Das, Afrin Prio, Pritu Saha, Shion Guha, Syed Ishtiaque Ahmed",
+            "title": "How do the Global South Diasporas Mobilize for Transnational Political Change?",
+            "venue": "CHI 2026",
+            "url": "https://doi.org/10.1145/3772318.3791792",
+            "doi": "10.1145/3772318.3791792",
+            "award": "Best Paper Honorable Mention Award"
+          }
+        ],
+        "extendedAbstracts": [],
+        "researchArtifacts": []
+      }
+    },
     "sectionLabel": "Books",
     "sectionMonographTitle": "Monographs",
     "sectionTitleTemplate": "Year",
@@ -334,7 +385,10 @@
     "yearPlural": "years",
     "bookCoverPlaceholder": "Book",
     "articlePrefix": "Article",
-    "emptyMessage": "No publications indexed yet — check back soon."
+    "emptyMessage": "No publications indexed yet — check back soon.",
+    "awardBadgeLabel": "Award",
+    "venuesLabel": "Venues",
+    "viewPaperLabel": "View paper"
   },
   "aboutPage": {
     "pageTitle": "About — Thirdspace | University of Toronto",

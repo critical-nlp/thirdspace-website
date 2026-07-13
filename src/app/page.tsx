@@ -187,6 +187,7 @@ export default function Home() {
           <div className="relative overflow-hidden rounded-[2rem] border border-primary/15 bg-card/85 shadow-2xl shadow-primary/10 backdrop-blur">
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,transparent_0%,transparent_54%,var(--accent)_54%,transparent_55%)] opacity-25" />
             <div className="pointer-events-none absolute bottom-0 left-0 h-28 w-full bg-gradient-to-t from-primary/5 to-transparent" />
+            <div className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full border border-primary/10 bg-primary/5" />
             <div className="grid gap-0 items-stretch lg:grid-cols-[minmax(0,1fr)_380px]">
               <div className="relative p-6 md:p-10 lg:p-12">
                 <div className="mb-7 flex flex-wrap items-center justify-between gap-4 border-b border-border/80 pb-5">
